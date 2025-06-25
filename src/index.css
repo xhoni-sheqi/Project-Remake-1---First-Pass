@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+.password-checker {
+  height: 100vh;
+  background: #132a39;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-checker-container {
+  width: 20vw;
+  height: 50vh;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.password-checker-container h3 {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.password-checker-container input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 0.5px solid #333;
+}
+
+.password-checker-container .condition ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.password-checker-container .condition ul li {
+  font-size: 1.5rem;
+  color: #8d979e;
+}
+
+.password-checker-container .buttons {
+  display: flex;
+  gap: 3rem;
+}
+
+.password-checker-container .buttons button {
+  padding: 1.5rem 2rem;
+  background: #0094c5;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  outline: none;
+}
