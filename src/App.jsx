@@ -1,7 +1,9 @@
+import PasswordChecker from "./components/PasswordChecker";
+
 function App() {
   return (
     <div>
-      <h1>Funziona</h1>
+      <PasswordChecker />
     </div>
   );
 }
