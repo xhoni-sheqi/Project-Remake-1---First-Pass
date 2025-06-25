@@ -6,13 +6,13 @@ function PasswordChecker() {
   const [password, setPassword] = useState("");
   const [passwordCondition, setPasswordCondition] = useState(conditionsBool);
   const [showPassword, setShowPassword] = useState(false);
-  const [pawned, setPawned] = useState(null); // Renamed from 'isPwned' for consistency with your variable name 'pawned'
+  const [pawned, setPawned] = useState(null); 
 
   const handlePasswordChange = (e) => {
     const newPWD = e.target.value;
     setPassword(newPWD);
 
-    setPawned(null); // Reset HIBP status immediately when password changes
+    setPawned(null); 
 
     setPasswordCondition({
       hasLowerCase: /[a-z]/.test(newPWD),
@@ -21,12 +21,11 @@ function PasswordChecker() {
       hasSpecialCharacter: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]/.test(
         newPWD
       ),
-      isMinLenght: newPWD.length >= 8, // Use >= for "at least 8"
+      isMinLenght: newPWD.length >= 8, 
     });
   };
 
   const handleCopyPassword = async () => {
-    // Make it async as navigator.clipboard.writeText returns a Promise
     try {
       if (password) {
         await navigator.clipboard.writeText(password);
@@ -62,7 +61,6 @@ function PasswordChecker() {
       );
 
       if (!response.ok) {
-        // Handle specific HIBP API rate limit or other errors
         if (response.status === 429) {
           throw new Error(
             "Too many requests. Please wait a moment before trying again."
@@ -73,7 +71,6 @@ function PasswordChecker() {
 
       const text = await response.text();
 
-      // FIX 1: Correct usage of split and map
       const hashes = text.split("\r\n").map((line) => {
         const [hashSuffix, count] = line.split(":");
         return { hashSuffix, count: parseInt(count, 10) };
@@ -93,12 +90,11 @@ function PasswordChecker() {
         );
       }
     } catch (error) {
-      // FIX 2: Correct catch block syntax
       console.error("Error checking pwned password:", error);
       alert(
         `Error checking password: ${error.message || "Please try again later."}`
       );
-      setPawned(null); // Reset on error
+      setPawned(null); 
     }
   };
 
@@ -116,7 +112,7 @@ function PasswordChecker() {
             />
             <button onClick={handleCopyPassword}>Copy</button>
             <button onClick={handleShowPassword}>
-              {showPassword ? "🙈" : "👁️"} {/* Corrected icons for clarity */}
+              {showPassword ? "🙈" : "👁️"} 
             </button>
           </div>
           <div className="line"></div>
@@ -131,13 +127,11 @@ function PasswordChecker() {
                 }
               >
                 {condition.text}
-                {/* Visual feedback for individual conditions */}
                 {passwordCondition[condition.id] ? " ✅" : " ❌"}
               </li>
             ))}
           </ul>
-          {/* Display HIBP check result */}
-          {pawned !== null && ( // Only show if checked
+          {pawned !== null && ( 
             <p className={`hibp-status ${pawned ? "pwned" : "not-pwned"}`}>
               {pawned
                 ? "🚨 This password has been found in data breaches!"
@@ -147,8 +141,7 @@ function PasswordChecker() {
         </div>
         <div className="buttons">
           <button onClick={handlePawnedPassword}>Check for Breaches</button>{" "}
-          {/* Renamed for clarity */}
-          <button>Will they crack it</button> {/* Original buttons */}
+          <button>Will they crack it</button>
         </div>
       </div>
     </div>
