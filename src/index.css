@@ -1,77 +1,231 @@
-*,
-*::before,
-*::after {
+/* Stili di base e reset - mantienili */
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; /* Rende 1rem = 10px per facilitare i calcoli */
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font più moderno */
+  line-height: 1.6; /* Migliora la leggibilità del testo */
+  color: #333; /* Colore testo generale */
 }
 
 li {
   list-style: none;
 }
 
+/* Stile per la riga attraverso il testo - ora con transizione */
+.line-through {
+  text-decoration: line-through;
+  color: #a0a0a0; /* Colore più spento per le voci completate */
+  transition: color 0.3s ease-in-out; /* Transizione fluida */
+}
+
+
+/* Contenitore principale del checker */
 .password-checker {
   height: 100vh;
-  background: #132a39;
+  background: linear-gradient to bottom right, #1a425f, #0f2e46); /* Sfumatura più gradevole */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+
+/* Card del checker della password */
 .password-checker-container {
-  width: 20vw;
-  height: 50vh;
+  width: 35vw;
+  max-width: 500px;
+  height: auto;
+  min-height: 50vh;
   margin: 0 auto;
   background: #fff;
-  border-radius: 1rem;
-  padding: 2rem;
+  border-radius: 1.5rem;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
 }
 
 .password-checker-container h3 {
-  font-size: 3.5rem;
-  margin-bottom: 2rem;
+  font-size: 3.8rem;
+  margin-bottom: 2.5rem;
+  color: #2c3e50;
+  text-align: center;
 }
 
-.password-checker-container input {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.5rem;
+/* --- NEW / MODIFIED CSS FOR .input-zone --- */
+.password-checker-container .input-zone {
+  display: flex; /* Use flexbox to align input and buttons */
+  gap: 1rem; /* Space between input and buttons */
+  align-items: center; /* Vertically center items */
+  margin-bottom: 2rem; /* Space below the entire input zone */
+}
+
+.password-checker-container .input-zone input {
+  flex-grow: 1; /* Allow input to take up available space */
+  padding: 1.5rem;
+  font-size: 1.8rem;
   outline: none;
-  border: 0.5px solid #333;
+  border: 1px solid #ccc;
+  border-radius: 0.8rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Removed margin-bottom here as it's now handled by .input-zone */
 }
 
+.password-checker-container .input-zone input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+}
+
+.password-checker-container .input-zone button {
+  /* Style for buttons directly inside .input-zone */
+  background: none; /* Remove default button background */
+  border: 1px solid #ccc; /* Add a subtle border */
+  border-radius: 0.8rem;
+  padding: 1.2rem 1.5rem; /* Adjust padding for smaller, compact buttons */
+  cursor: pointer;
+  font-size: 1.8rem; /* Make icon/text larger */
+  color: #555; /* Default color for the icon */
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0; /* Prevent buttons from shrinking too much */
+}
+
+.password-checker-container .input-zone button:hover {
+  background-color: #f0f0f0;
+  color: #007bff; /* Highlight color on hover */
+  border-color: #007bff;
+}
+
+.password-checker-container .input-zone button:active {
+  background-color: #e0e0e0;
+}
+
+/* The line element if still needed (ensure its placement is correct relative to .input-zone) */
+.password-checker-container .line {
+  height: 2px;
+  background-color: #eee;
+  margin-bottom: 2rem; /* This might need adjustment based on final layout */
+}
+
+
+/* Lista delle condizioni */
 .password-checker-container .condition ul {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-}
-.password-checker-container .condition ul li {
-  font-size: 1.5rem;
-  color: #8d979e;
+  gap: 1.5rem; /* Spaziatura tra le voci ridotta leggermente */
+  margin-bottom: 3rem; /* Spazio prima dei bottoni */
 }
 
+.password-checker-container .condition ul li {
+  font-size: 1.7rem; /* Testo delle condizioni più grande */
+  color: #555; /* Colore più scuro per le condizioni non soddisfatte */
+  display: flex;
+  align-items: center; /* Allinea testo e eventuale icona */
+}
+
+/* Stili per le icone (se le userai, ad esempio con Font Awesome) */
+.password-checker-container .condition ul li::before {
+    /* Esempio di icona, dovrai integrare una libreria tipo Font Awesome */
+    /* content: '✖'; */ /* X rossa */
+    /* color: red; */
+    /* margin-right: 1rem; */
+    /* font-size: 1.2em; */
+    /* line-height: 1; */
+}
+
+.password-checker-container .condition ul li.line-through::before {
+    /* content: '✓'; */ /* Tick verde */
+    /* color: green; */
+}
+
+
+/* Contenitore dei bottoni */
 .password-checker-container .buttons {
   display: flex;
-  gap: 3rem;
+  flex-wrap: wrap; /* Permette ai bottoni di andare a capo su schermi piccoli */
+  gap: 1.5rem; /* Spaziatura tra i bottoni */
+  justify-content: center; /* Centra i bottoni */
+  margin-top: 2rem;
 }
 
+/* Stile dei bottoni */
 .password-checker-container .buttons button {
-  padding: 1.5rem 2rem;
-  background: #0094c5;
+  padding: 1.6rem 2.5rem; /* Padding generoso */
+  background: linear-gradient(45deg, #007bff, #0056b3); /* Sfumatura blu più moderna */
   color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem; /* Bordi più arrotondati */
   outline: none;
+  font-size: 1.6rem; /* Testo del bottone più grande */
+  font-weight: bold; /* Testo in grassetto */
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transizioni al hover/active */
+  flex-grow: 1; /* Permette ai bottoni di espandersi */
+  min-width: 160px; /* Larghezza minima per i bottoni */
+}
+
+.password-checker-container .buttons button:hover {
+  background: linear-gradient(45deg, #0056b3, #004085); /* Sfumatura più scura al hover */
+  transform: translateY(-2px); /* Leggero sollevamento */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* Ombra al hover */
+}
+
+.password-checker-container .buttons button:active {
+  transform: translateY(0); /* Ritorno alla posizione originale */
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1); /* Ombra ridotta */
+}
+
+/* Media Queries per la Responsività */
+@media (max-width: 768px) {
+  .password-checker-container {
+    width: 90vw; /* Più largo su schermi piccoli */
+    padding: 2.5rem;
+  }
+
+  .password-checker-container h3 {
+    font-size: 3rem;
+  }
+
+  .password-checker-container input {
+    font-size: 1.6rem;
+    padding: 1.2rem;
+  }
+
+  .password-checker-container .condition ul li {
+    font-size: 1.6rem;
+  }
+
+  .password-checker-container .buttons {
+    flex-direction: column; /* Bottoni in colonna su schermi piccoli */
+    gap: 1rem;
+  }
+
+  .password-checker-container .buttons button {
+    width: 100%; /* Bottoni a tutta larghezza */
+  }
+}
+
+@media (max-width: 480px) {
+  .password-checker-container {
+    padding: 2rem;
+  }
+
+  .password-checker-container h3 {
+    font-size: 2.5rem;
+  }
+
+  .password-checker-container input {
+    font-size: 1.5rem;
+  }
+
+  .password-checker-container .condition ul li {
+    font-size: 1.5rem;
+  }
 }
