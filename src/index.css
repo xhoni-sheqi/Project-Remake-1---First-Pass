@@ -26,6 +26,10 @@ li {
   transition: color 0.3s ease-in-out; /* Transizione fluida */
 }
 
+.pwned , .not-pwned {
+  font-size: 1.6rem;
+}
+
 
 /* Contenitore principale del checker */
 .password-checker {
